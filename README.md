@@ -1,0 +1,1 @@
+# Nixos-stable-SAFE
