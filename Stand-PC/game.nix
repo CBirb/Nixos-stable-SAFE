@@ -29,7 +29,7 @@
     powerManagement.finegrained = false;
 
     # Use the NVidia open source kernel module 
-    open = true;
+    open = false;
 
     nvidiaSettings = true;
 

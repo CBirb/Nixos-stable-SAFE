@@ -27,7 +27,11 @@
 
   # Kernel
   # boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelPackages = pkgs.linuxPackages;
+  # boot.kernelPackages = pkgs.linuxPackages;
+  # boot.kernelPackages = pkgs.linuxPackages-rt;
+  boot.kernelPackages = pkgs.linuxPackages_zen;
+
+
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -150,7 +154,9 @@
 
   # Insecure Packages
   nixpkgs.config.permittedInsecurePackages = [
-    "ventoy-qt5-1.1.05"
+    "ventoy-qt5-1.1.07"
+    "qtwebengine-5.15.19"
+
   ];
 
   
@@ -320,135 +326,135 @@
 
 
     # Daws
-    reaper
-    reaper-sws-extension
-    reaper-reapack-extension
-    ardour
-    lmms
+    # reaper
+    # reaper-sws-extension
+    # reaper-reapack-extension
+    # ardour
+    # lmms
 
 
 
     # Clap-Vst
-    clap
-    rPackages.clap
-    chow-tape-model
-    lsp-plugins
+    # clap
+    # rPackages.clap
+    # chow-tape-model
+    # lsp-plugins
     
     # LV2-Vst
-    lv2
-    lv2bm
-    lv2lint
-    lv2-cpp-tools
-    mod-arpeggiator-lv2
-    rkrlv2
-    bolliedelayxt-lv2
-    airwindows-lv2
-    magnetophonDSP.CharacterCompressor
-    python313Packages.sphinx-lv2-theme
-    python312Packages.sphinx-lv2-theme
-    aether-lv2
-    swh_lv2
-    neural-amp-modeler-lv2
-    mda_lv2
-    x42-plugins
-    tunefish
-    ttl2c
-    sfizz
-    plugin-torture
-    open-music-kontrollers.vm
-    open-music-kontrollers.synthpod
-    open-music-kontrollers.moony
-    open-music-kontrollers.midi_matrix
-    noise-repellent
-    mod-distortion
-    magnetophonDSP.pluginUtils
-    infamousPlugins
-    drumgizmo
-    distrho-ports
-    bshapr
-    bchoppr
-    gxplugins-lv2
-    talentedhack
-    sratom
-    plujain-ramp
-    open-music-kontrollers.orbit
-    open-music-kontrollers.mephisto
-    mooSpace
-    magnetophonDSP.RhythmDelay
-    magnetophonDSP.MBdistortion
-    lilv
-    fverb
-    jalv
-    jalv-qt
+    # lv2
+    # lv2bm
+    # lv2lint
+    # lv2-cpp-tools
+    # mod-arpeggiator-lv2
+    # rkrlv2
+    # bolliedelayxt-lv2
+    # airwindows-lv2
+    # magnetophonDSP.CharacterCompressor
+    # python313Packages.sphinx-lv2-theme
+    # python312Packages.sphinx-lv2-theme
+    # aether-lv2
+    # swh_lv2
+    # neural-amp-modeler-lv2
+    # mda_lv2
+    # x42-plugins
+    # tunefish
+    # ttl2c
+    # sfizz
+    # plugin-torture
+    # open-music-kontrollers.vm
+    # open-music-kontrollers.synthpod
+    # open-music-kontrollers.moony
+    # open-music-kontrollers.midi_matrix
+    # noise-repellent
+    # mod-distortion
+    # magnetophonDSP.pluginUtils
+    # infamousPlugins
+    # drumgizmo
+    # distrho-ports
+    #bshapr
+    #bchoppr
+    # gxplugins-lv2
+    # talentedhack
+    # sratom
+    # plujain-ramp
+    # open-music-kontrollers.orbit
+    # open-music-kontrollers.mephisto
+    # mooSpace
+    # magnetophonDSP.RhythmDelay
+    # magnetophonDSP.MBdistortion
+    # lilv
+    # fverb
+    # jalv
+    # jalv-qt
     # fmsynth
-    boops
-    artyFX
-    metersLv2
-    bs2b-lv2
+    # boops
+    # artyFX
+    # metersLv2
+    # bs2b-lv2
     # ams-lv2
-    speech-denoiser
-    open-music-kontrollers.sherlock
-    open-music-kontrollers.router
-    ninjas2
-    magnetophonDSP.LazyLimiter
-    lvtk
-    kapitonov-plugins-pack
-    eq10q
-    bsequencer
-    zam-plugins
-    x42-gmsynth
-    suil
-    sorcer
-    open-music-kontrollers.jit
-    open-music-kontrollers.eteroj
-    bschaffl
-    x42-avldrums
-    surge-XT
-    surge
-    molot-lite
-    ingen
-    fomp
-    faustPhysicalModeling
-    bslizr
-    bjumblr
-    midi-trigger
-    magnetophonDSP.CompBus
+    # speech-denoiser
+    # open-music-kontrollers.sherlock
+    # open-music-kontrollers.router
+    # ninjas2
+    # magnetophonDSP.LazyLimiter
+    # lvtk
+    # kapitonov-plugins-pack
+    # eq10q
+    # bsequencer
+    # zam-plugins
+    # x42-gmsynth
+    # suil
+    # sorcer
+    # open-music-kontrollers.jit
+    # open-music-kontrollers.eteroj
+    # bschaffl
+    # x42-avldrums
+    # surge-XT
+    # surge
+    # molot-lite
+    # ingen
+    # fomp
+    # faustPhysicalModeling
+    # bslizr
+    # bjumblr
+    # midi-trigger
+    # magnetophonDSP.CompBus
     # magnetophonDSP.ConstantDetuneChorus
-    vocproc
-    juce
-    triforce-lv2
-    librearp-lv2
+    # vocproc
+    # juce
+    # triforce-lv2
+    # librearp-lv2
     # gxmatcheq-lv2
-    faust2lv2
-    bankstown-lv2
+    # faust2lv2
+    # bankstown-lv2
     
 
     # Vst
-    vst2-sdk
-    airwindows
-    oxefmsynth
-    bespokesynth-with-vst2
-    ninjas2
-    bespokesynth
+    # vst2-sdk
+    # airwindows
+    # oxefmsynth
+    # bespokesynth-with-vst2
+    # ninjas2
+    # bespokesynth
     
     # Other Vst 
-    paulstretch
-    vital
-    drumgizmo
-    guitarix
-    odin2
-    synth
-    synthv1
+    # paulstretch
+    # vital
+    # drumgizmo
+    # guitarix
+    # odin2
+    # synth
+    # synthv1
     # haskellPackages.YampaSynth
-    xsynth_dssi
-    opnplug
-    adlplug
-    sonivox
+    # xsynth_dssi
+    # opnplug
+    # adlplug
+    # sonivox
     # qes
     # fmsynth
-    magnetophonDSP.VoiceOfFaust
+    # magnetophonDSP.VoiceOfFaust
     # haskellPackages.ecta-plugin
-    decent-sampler
+    # decent-sampler
 
        
     ## Net
