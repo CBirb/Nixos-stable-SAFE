@@ -59,6 +59,20 @@
   services.displayManager.sddm.wayland.enable = true;
   services.desktopManager.plasma6.enable = true;
 
+  # Hyprland
+  programs.hyprland = {
+    enable = true;
+    withUWSM = true; # recommended for most users
+    xwayland.enable = true; # Xwayland can be disabled.
+  };
+ 
+  xdg.portal = {
+    enable = true;
+    extraPortals = with pkgs; [ xdg-desktop-portal-hyprland ];
+  };
+
+  fonts.packages = builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
+
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "at";
@@ -90,7 +104,7 @@
   services.pipewire.extraConfig.pipewire."92-low-latency" = {
     "context.properties" = {
       "default.clock.rate" = 48000;        # Samplerate
-      "default.clock.quantum" = 256;       # Buffersize
+      "default.clock.quantum" = 128;       # Buffersize
       "default.clock.min-quantum" = 64;
       "default.clock.max-quantum" = 512;
     };
@@ -129,7 +143,7 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Install firefox.
-  programs.firefox.enable = true;
+  # programs.firefox.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -170,7 +184,7 @@
     ghostty
     megasync
     mission-center
-    
+    bat
 
     # Razer
     openrazer-daemon
@@ -247,7 +261,19 @@
     folder-color-switcher
     gnome.gvfs
     gvfs
-    
+  
+    # Hyprland Tools
+    hyprlock
+    hypridle
+    hyprpaper  
+    hyprsunset
+    hyprpicker
+    hyprpolkitagent
+    waybar
+    fuzzel
+    kitty  
+
+
     ## Gaming
     
     # Main Games
