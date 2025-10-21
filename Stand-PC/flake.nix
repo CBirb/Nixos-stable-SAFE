@@ -1,48 +1,38 @@
 {
-  description = "A very basic flake with Musnix support";
+  description = "NixOS configuration with Musnix and multiple nixpkgs channels";
 
   inputs = {
-    #   nixpkgs.url = "github:NixOS/nixpkgs/<branch name>";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    # nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
-    # nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05-small";
-
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.05";
     nixpkgs-oldstable.url = "github:NixOS/nixpkgs/nixos-24.11";
     nixpkgs-oldoldstable.url = "github:NixOS/nixpkgs/nixos-24.05";
-  
-    musnix.url  = "github:musnix/musnix";
+    musnix.url = "github:musnix/musnix";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-stable, nixpkgs-oldstable, nixpkgs-oldoldstable ,musnix, home-manager, ... } @ inputs: 
+  outputs = { self, nixpkgs, nixpkgs-stable, nixpkgs-oldstable, nixpkgs-oldoldstable, musnix, ... } @ inputs:
   let
     system = "x86_64-linux";
-    pkgs = import nixpkgs {
+  in {
+    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       inherit system;
-      overlays = [ musnix.overlay ];
-    };
-  in
-  rec {
-    packages.${system} = {
-      hello = pkgs.hello;
-      default = pkgs.hello;
-    };
+      specialArgs = { inherit inputs; };
 
-    nixosConfigurations = {
-      nixos = nixpkgs.lib.nixosSystem {
-        inherit system;
-        modules = [
-          musnix.nixosModules.musnix
-          ./configuration.nix
-        ];
-        specialArgs = { inherit inputs; };
-      };
+      modules = [
+        musnix.nixosModules.musnix
+
+        ({
+          nixpkgs.overlays = [
+            (final: prev: {
+              stable = import nixpkgs-stable { inherit system; config.allowUnfree = true; };
+              oldstable = import nixpkgs-oldstable { inherit system; config.allowUnfree = true; };
+              oldoldstable = import nixpkgs-oldoldstable { inherit system; config.allowUnfree = true; };
+            })
+          ];
+        })
+
+        ./configuration.nix
+      ];
     };
   };
-
-
-
-
-
 }
 

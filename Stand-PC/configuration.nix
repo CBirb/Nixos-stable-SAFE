@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, inputs, ... }:
 
 {
   imports =
@@ -326,17 +326,17 @@
 
 
     # Daws
-    # reaper
-    # reaper-sws-extension
-    # reaper-reapack-extension
-    # ardour
-    # lmms
+    reaper
+    reaper-sws-extension
+    reaper-reapack-extension
+    ardour
+    stable.lmms
 
 
 
     # Clap-Vst
-    # clap
-    # rPackages.clap
+    clap
+    rPackages.clap
     # chow-tape-model
     # lsp-plugins
     
