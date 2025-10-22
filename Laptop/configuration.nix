@@ -16,7 +16,6 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  boot.initrd.luks.devices."luks-81701fa6-ffe8-4aed-bd3b-d2af1d5376f8".device = "/dev/disk/by-uuid/81701fa6-ffe8-4aed-bd3b-d2af1d5376f8";
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -45,19 +44,21 @@
     LC_TIME = "de_AT.UTF-8";
   };
 
-  # Enable the X11 windowing system.
-  
-  # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+   # Enable the X11 windowing system.
+  services.xserver.enable = true;
+
+  # Enable the Cinnamon Desktop Environment.
+  services.xserver.displayManager.lightdm.enable = true;
+  services.xserver.desktopManager.cinnamon.enable = true;
+
 
   # Hyprland
-  programs.hyprland = {
+  # programs.hyprland = {
     # Install the packages from nixpkgs
-    enable = true;
+  #   enable = true;
     # Whether to enable XWayland
-    xwayland.enable = true;
-  };
+  #   xwayland.enable = true;
+  # };
 
   # fonts.packages = with pkgs; [ nerdfonts ];
 
@@ -156,6 +157,7 @@
     insync
     megasync
     distrobox
+    gnome-software
 
     # Video
     blackmagic
