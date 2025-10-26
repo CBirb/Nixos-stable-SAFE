@@ -17,7 +17,7 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-														
+
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -59,26 +59,26 @@
   services.xserver.enable = true;
 
   # Enable the Cinnamon Desktop Environment.
-  # services.xserver.displayManager.lightdm.enable = true;
-  # services.xserver.desktopManager.cinnamon.enable = true;
+  services.xserver.displayManager.lightdm.enable = true;
+  services.xserver.desktopManager.cinnamon.enable = true;
 
 
   # Enable the KDE Plasma Desktop Environment.
-  services.displayManager.sddm.enable = true;
-  services.displayManager.sddm.wayland.enable = true;
-  services.desktopManager.plasma6.enable = true;
+  # services.displayManager.sddm.enable = true;
+  # services.displayManager.sddm.wayland.enable = true;
+  # services.desktopManager.plasma6.enable = true;
 
   # Hyprland
-  programs.hyprland = {
-    enable = true;
-    withUWSM = true; # recommended for most users
-    xwayland.enable = true; # Xwayland can be disabled.
-  };
+  # programs.hyprland = {
+  #   enable = true;
+  #   withUWSM = true; # recommended for most users
+  #   xwayland.enable = true; # Xwayland can be disabled.
+  # };
  
-  xdg.portal = {
-    enable = true;
-    extraPortals = with pkgs; [ xdg-desktop-portal-hyprland ];
- };
+  # xdg.portal = {
+  #   enable = true;
+  #   extraPortals = with pkgs; [ xdg-desktop-portal-hyprland ];
+  # };
 
   fonts.packages = builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
 
@@ -159,8 +159,9 @@
 
   # Insecure Packages
   nixpkgs.config.permittedInsecurePackages = [
-    "ventoy-qt5-1.1.05"
+    "ventoy-qt5-1.1.07"
     "qtwebengine-5.15.19"
+
   ];
 
   
@@ -187,19 +188,15 @@
     git
     unzip
     unrar
-    stable.ventoy-full-qt
+    ventoy-full-qt
     ptyxis
+    internetarchive
+    speedtest
     ghostty
     megasync
     mission-center
     bat
-    podman-compose
     
-    # Appimage
-    # fetchurl
-    appimage-run
-    libappimage
-    freerdp      
 
     # Razer
     openrazer-daemon
@@ -219,15 +216,16 @@
     fastfetch
 
     ## BTRFS  Tools
-    stable.btrfs-progs
-    stable.btrfs-assistant
-    stable.btrfs-list
-    stable.btrfs-heatmap
+    btrfs-progs
+    btrfs-assistant
+    btrfs-list
+    btrfs-heatmap
 
     ## Coding
      
     # Coding Tools
     valgrind
+    python-qt
     python314
     python313
     python311
@@ -238,6 +236,7 @@
     rustup
     go
     rocmPackages.clang
+    rocmPackages.llvm.clang-unwrapped
 
 
 
@@ -253,16 +252,20 @@
     vulkan-utility-libraries
     nvtopPackages.nvidia
     nvidia-container-toolkit
- 
+    nvidia-optical-flow-sdk
+     
 
     ## Desktop Tools  
     kdePackages.partitionmanager
+    kdePackages.discover
     kdePackages.ffmpegthumbs
     kdePackages.plasma-pa
+    kdePackages.gwenview
     kdePackages.libkdegames
     xfce.thunar
     xfce.xfburn
     xfce.mousepad
+    gnomeExtensions.utcclock
     gnome-software
     nemo-with-extensions
     nemo-python
@@ -477,10 +480,8 @@
   nix.gc = {
     automatic = true;
     dates = "weekly";
-    options = "--delete-older-than 10d";
+    options = "--delete-older-than 16d";
   };
-  nix.settings.auto-optimise-store = true;
-
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

@@ -23,7 +23,11 @@
   # Enable USB redirection (optional)
   virtualisation.spiceUSBRedirection.enable = true;
 
-
+  # Appimages
+  programs.appimage = {
+    enable = true;
+    binfmt = true;
+  };
 
   # Flathub
   services.flatpak.enable = true;
