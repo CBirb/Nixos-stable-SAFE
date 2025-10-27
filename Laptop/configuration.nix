@@ -48,19 +48,23 @@
   services.xserver.enable = true;
 
   # Enable the Cinnamon Desktop Environment.
-  services.xserver.displayManager.lightdm.enable = true;
-  services.xserver.desktopManager.cinnamon.enable = true;
+  # services.xserver.displayManager.lightdm.enable = true;
+  # services.xserver.desktopManager.cinnamon.enable = true;
 
+  # KDE
+  services.displayManager.sddm.enable = true;
+  services.displayManager.sddm.wayland.enable = true;
+  services.desktopManager.plasma6.enable = true;
 
   # Hyprland
-  # programs.hyprland = {
+  programs.hyprland = {
     # Install the packages from nixpkgs
-  #   enable = true;
+    enable = true;
     # Whether to enable XWayland
-  #   xwayland.enable = true;
-  # };
+    xwayland.enable = true;
+  };
 
-  # fonts.packages = with pkgs; [ nerdfonts ];
+ #  fonts.packages = with pkgs; [ nerdfonts ];
 
 
   # Enable the COSMIC login manager
@@ -182,19 +186,7 @@
 
     # Hyprland
     hyprpolkitagent
-    
-    # Gnome
-    gnomeExtensions.zim-quick-launch
-    gnomeExtensions.zilence
-    gnomeExtensions.zen
-    gnomeExtensions.zed-search-provider
-    gnomeExtensions.workspace-overlay
-    gnomeExtensions.workspace-matrix
-    gnomeExtensions.workspace-indicator
-    gnomeExtensions.workspace-buttons-with-app-icons
-    gnomeExtensions.worksets
-    gnomeExtensions.wintile-beyond
-    
+     
 
   ];
 
@@ -210,8 +202,11 @@
   nix.gc = {
     automatic = true;
     dates = "weekly";
-    options = "--delete-older-than 16d";
+    options = "--delete-older-than 10d";
   };
+
+  nix.settings.auto-optimise-store = true;
+  
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
