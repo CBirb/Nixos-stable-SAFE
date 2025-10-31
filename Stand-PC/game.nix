@@ -29,35 +29,32 @@
     powerManagement.finegrained = false;
 
     # Use the NVidia open source kernel module 
-    open = false;
+    open = true;
 
     nvidiaSettings = true;
 
+   
     package = config.boot.kernelPackages.nvidiaPackages.stable;
     # package = config.boot.kernelPackages.nvidiaPackages.beta;
   };
 
-  # OBS
-  
+
   programs.obs-studio = {
     enable = true;
-
-  # optional Nvidia hardware acceleration
-   package = (
-     pkgs.obs-studio.override {
-       cudaSupport = true;
-     }
-   );
-
-     plugins = with pkgs.obs-studio-plugins; [
-       wlrobs
-       obs-backgroundremoval
-       obs-pipewire-audio-capture
-       obs-vaapi #optional AMD hardware acceleration
-       obs-gstreamer
-       obs-vkcapture
-     ];
-   };
+      package = (
+        pkgs.obs-studio.override {
+          cudaSupport = true;
+        }
+      );
+    plugins = with pkgs.obs-studio-plugins; [
+      wlrobs
+      obs-backgroundremoval
+      obs-pipewire-audio-capture
+      obs-vaapi
+      obs-gstreamer
+      obs-vkcapture
+    ];
+  };
 
    # Steam
    programs = {
@@ -83,11 +80,6 @@
 
   # Gamemode
   programs.gamemode.enable = true;
-
-  # Swappiness
-  # boot.kernel.sysctl = {
-  #   "vm.swappiness" = 10;
-  # };
 
 
 }

@@ -251,18 +251,16 @@
     vulkan-loader
     vulkan-headers
     vulkan-utility-libraries
-    nvtopPackages.nvidia
+    stable.nvtopPackages.nvidia
     nvidia-container-toolkit
  
 
     ## Desktop Tools  
     kdePackages.partitionmanager
     kdePackages.ffmpegthumbs
-    kdePackages.plasma-pa
-    kdePackages.libkdegames
+    kdePackages.discover
     xfce.thunar
     xfce.xfburn
-    xfce.mousepad
     gnome-software
     nemo-with-extensions
     nemo-python
@@ -333,12 +331,12 @@
 
 
     # Daws
-    reaper
-    reaper-sws-extension
-    reaper-reapack-extension
+    stable.reaper
+    stable.reaper-sws-extension
+    stable.reaper-reapack-extension
     ardour
     stable.lmms
-
+    stable.audacity
 
 
     # Clap-Vst
@@ -469,6 +467,9 @@
     gnunet-gtk
     libgnurl
 
+    ## Cr-Stuff
+    monero-gui
+    monero-cli
 
   ];
 
