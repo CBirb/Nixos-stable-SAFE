@@ -9,6 +9,8 @@
     
     musnix.url = "github:musnix/musnix";
 
+    hyprland.url = "github:hyprwm/Hyprland";
+
     home-manager = {
       # url = "github:nix-community/home-manager/release-25.05";
       url = "github:nix-community/home-manager";

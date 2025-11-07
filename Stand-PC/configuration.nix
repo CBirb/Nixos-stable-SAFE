@@ -56,7 +56,7 @@
 
   # Enable the X11 windowing system.
   # You can disable this if you're only using the Wayland session.
-  services.xserver.enable = true;
+  # services.xserver.enable = true;
 
   # Enable the Cinnamon Desktop Environment.
   # services.xserver.displayManager.lightdm.enable = true;
@@ -68,17 +68,28 @@
   services.displayManager.sddm.wayland.enable = true;
   services.desktopManager.plasma6.enable = true;
 
+  # Gnome-Desktop
+  # services.displayManager.gdm.enable = true;
+  # services.desktopManager.gnome.enable = true;
+
   # Hyprland
+  nix.settings = {
+    substituters = ["https://hyprland.cachix.org"];
+    trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+  };
+
   programs.hyprland = {
     enable = true;
-    withUWSM = true; # recommended for most users
-    xwayland.enable = true; # Xwayland can be disabled.
-  };
- 
-  xdg.portal = {
-    enable = true;
-    extraPortals = with pkgs; [ xdg-desktop-portal-hyprland ];
- };
+    # set the flake package
+    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+    # make sure to also set the portal package, so that they are in sync
+    portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+  }; 
+
+  # xdg.portal = {
+  #   enable = true;
+  #   extraPortals = with pkgs; [ xdg-desktop-portal-hyprland ];
+  # };
 
   fonts.packages = builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
 
@@ -113,9 +124,9 @@
   services.pipewire.extraConfig.pipewire."92-low-latency" = {
     "context.properties" = {
       "default.clock.rate" = 48000;        # Samplerate
-      "default.clock.quantum" = 128;       # Buffersize
+      "default.clock.quantum" = 64;       # Buffersize
       "default.clock.min-quantum" = 64;
-      "default.clock.max-quantum" = 512;
+      "default.clock.max-quantum" = 128;
     };
   };
 
@@ -251,7 +262,7 @@
     vulkan-loader
     vulkan-headers
     vulkan-utility-libraries
-    stable.nvtopPackages.nvidia
+    nvtopPackages.nvidia
     nvidia-container-toolkit
  
 
@@ -272,6 +283,9 @@
     folder-color-switcher
     gnome.gvfs
     gvfs
+    gnome-tweaks
+    
+    
   
     # Hyprland Tools
     hyprlock
@@ -297,29 +311,29 @@
     nexusmods-app
 
     # extra Games
-    bastet
-    ninvaders
+    stable.bastet
+    stable.ninvaders
     # pacman-game
-    nsnake
-    greed
-    bsdgames
-    nethack
-    moon-buggy
-    crawl
-    egoboo
-    sil-q
-    cataclysm-dda
-    brogue-ce
-    angband
-    narsil
+    stable.nsnake
+    stable.greed
+    stable.bsdgames
+    stable.nethack
+    stable.moon-buggy
+    stable.crawl
+    stable.egoboo
+    stable.sil-q
+    stable.cataclysm-dda
+    stable.brogue-ce
+    stable.angband
+    stable.narsil
     # tome2
-    ace-of-penguins
-    yquake2-all-games
+    stable.ace-of-penguins
+    stable.yquake2-all-games
 
 
     ## Video
-    blackmagic
-    davinci-resolve
+    stable.blackmagic
+    stable.davinci-resolve
     
     ## Audio-Production
 
@@ -470,7 +484,6 @@
     ## Cr-Stuff
     monero-gui
     monero-cli
-
   ];
 
   
@@ -500,8 +513,9 @@
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
-
+  networking = {
+    firewall.enable = true;
+  };
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
